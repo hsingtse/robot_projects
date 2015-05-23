@@ -1,0 +1,10 @@
+*** Test Cases ***
+get sub-string
+    ${ret}
+    ...    Should Match Regexp    Foo: 42    (?i)foo: \\d+
+    ${match}    ${group1}    ${group2} =
+    ...    Should Match Regexp    Bar: 43    (Foo|Bar): (\\d+)
+    ${matches}    Should Match Regexp    Bar: 43    Bar: (\\d+)
+    #    \    ${EMPTY}
+    ${str}    set variable    OpenTab('MOT','PreAdmit','131981','Edit','131981','','CCH','M.2015.05.05.15.44.57');
+    ${matches}    Should Match Regexp    ${str}    ','\\d+','(?)','

@@ -1,0 +1,17 @@
+*** Settings ***
+Suite Setup       Open Test DB
+Suite Teardown    Close Test DB
+Library           DatabaseLibrary
+Resource          DBResource.txt
+
+*** Test Cases ***
+Insert Data
+    @{des}    Description    select * from tab1
+    log many    @{des}
+    Execute Sql String    ${SQL_INSERT_TABLE_tab1}
+    @{des}    Query    select * from tab1
+
+Update Data
+    Execute Sql String    ${SQL_UPDATE_TABLE_tab1}
+    @{rs}    Query    select * from tab1 where id=1
+    log many    @{rs}

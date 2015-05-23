@@ -1,0 +1,34 @@
+*** Settings ***
+Library           Selenium2Library
+Library           String
+
+*** Test Cases ***
+CheckIfStringContainPattern
+    ${str}    Get Lines Containing String    abcde    aaa
+    ${cnt}    Get Length    ${str}
+
+convert list to string
+    @{lst}    Create list    aaaa    bbbb    cccc
+    ${sep}    set variable    -
+    ${str}    set variable    ${sep.join(${lst})}
+    log many    @{lst}
+    log many    ${lst}
+    log many    ${str}
+
+index of
+    ${str}    set variable    abc_def_None
+    ${substr}    set variable    _
+    ${idx}    set variable    ${str.find('${substr}')}
+    #
+    ${substr}    set variable    ${EMPTY}
+    ${idx}    set variable    ${str.find('${substr}')}
+    #
+    ${substr}    set variable    ${None}
+    ${idx}    set variable    ${str.find('${substr}')}
+
+substring
+    ${str}    set variable    abcdefg
+    ${sub}    set variable    ${str[3:]}
+    ${sub}    set variable    ${str[:2]}
+    ${sub}    set variable    ${str[-1:]}
+    ${sub}    set variable    ${str[:-1]}

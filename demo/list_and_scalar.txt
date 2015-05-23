@@ -1,0 +1,9 @@
+*** Test Cases ***
+Use list as scalar
+    @{list}    Create List    x    y    z
+    Log Many    ${list}
+    Log Many    @{list}
+    #
+    ${list}    Create List    aa    bb    cc
+    Log Many    ${list}
+    Log Many    @{list}

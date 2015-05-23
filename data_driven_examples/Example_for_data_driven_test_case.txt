@@ -1,0 +1,31 @@
+*** Settings ***
+Test Setup        Open firefox browser 2
+Test Teardown     Close All Browsers
+Force Tags        tag4
+Test Template     Open url
+Library           Selenium2Library
+
+*** Variables ***
+@{URL_LIST}       http://tw.yahoo.com    https://www.google.com.tw    http://www.pchome.com.tw
+
+*** Test Cases ***    target_url
+Go to several urls    [Tags]                       tag5
+                      https://www.google.com.tw
+                      http://tw.yahoo.com
+
+Template with FOR LOOP
+                      : FOR                        ${url}    IN    @{URL_LIST}
+                      \                            ${url}
+
+*** Keywords ***
+Open url
+    [Arguments]    ${url}
+    go to    ${url}
+    sleep    3
+
+Open firefox browser 2
+    open browser    about:blank
+
+Open browser to Url
+    [Arguments]    ${url}
+    open browser    ${url}

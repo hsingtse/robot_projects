@@ -1,0 +1,37 @@
+*** Settings ***
+Library           Collections
+Library           Selenium2Library
+Library           Process
+
+*** Test Cases ***
+open_chrome_browser
+    [Setup]    Start Process    chromedriver.exe
+    ${w1}    Open Browser    https://www.google.com    Chrome    remote_url=http://localhost:9515
+    ${w2}    Open Browser    http://tw.yahoo.com    Chrome    remote_url=http://localhost:9515
+    sleep    2
+    switch browser    ${w1}
+    close browser
+    sleep    1
+    switch browser    ${w2}
+    close browser
+    [Teardown]    Terminate Process    kill=True
+
+create_chrome_webdriver
+    [Setup]    Start Process    chromedriver.exe
+    ${capabilities}    Create Dictionary    platform=WINDOWS    browserName=chrome    version=    javascriptEnabled=True
+    ${remoteServer}    set variable    http://localhost:9515
+    ${kwargs}    Create Dictionary    command_executor=${remoteServer}    desired_capabilities=${capabilities}
+    ${w1}    Create Webdriver    Remote    kwargs=${kwargs}
+    go to    https://twitter.com
+    sleep    1
+    ${w2}    Create Webdriver    Remote    kwargs=${kwargs}
+    go to    https://tw.yahoo.com
+    sleep    1
+    #
+    switch browser    ${w1}
+    close browser
+    sleep    1
+    #
+    switch browser    ${w2}
+    close browser
+    [Teardown]    Terminate Process    kill=True

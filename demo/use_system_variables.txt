@@ -1,0 +1,11 @@
+*** Settings ***
+Library           OperatingSystem
+
+*** Test Cases ***
+Retrieve and reset env variable
+    log many    \%{RFTest} is '%{RFTest}' currently
+    Set Environment Variable    RFTest    bbb
+    log many    \%{RFTest} now reset to '%{RFTest}'
+
+Use env variable
+    log many    \%{RFTest} is '%{RFTest}' in another case

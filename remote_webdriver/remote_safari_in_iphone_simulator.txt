@@ -1,0 +1,17 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Collections
+
+*** Test Cases ***
+open_safari_by_create_webdriver
+    # parameter for Appium
+    ${capabilities}    Create Dictionary    platformName=iOS    platformVersion=7.1    deviceName=iPhone Simulator    browserName=safari    javascriptEnabled=True
+    # parameter for Create Webdriver
+    ${remoteServer}    set variable    http://192.168.43.15:4723/wd/hub    #point to appium server
+    ${kwargs}    Create Dictionary    command_executor=${remoteServer}    desired_capabilities=${capabilities}
+    # create remote webdriver
+    ${w1}    Create Webdriver    Remote    kwargs=${kwargs}
+    go to    https://tw.yahoo.com
+    sleep    3
+    close browser
+    #

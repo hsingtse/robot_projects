@@ -1,0 +1,19 @@
+*** Settings ***
+Library           OperatingSystem
+
+*** Test Cases ***
+Open Text File
+    ${pwd}    Get File    pwd.txt
+    SaveFile    pwd2.txt    ${pwd}
+
+Open Bin File
+    ${sz}    Get File Size    test.jpg
+    ${bf}    Get Binary File    test.jpg
+    Create Binary File    test2.jpg    ${bf}    #Create Binary File not exists in suggestions list
+
+*** Keywords ***
+SaveFile
+    [Arguments]    ${name}    ${content}
+    ${status}    ${values}    Run Keyword And Ignore Error    File Should Exist    ${name}
+    Run Keyword If    '${status}' == 'PASS'    Remove File    ${name}
+    Create File    ${name}    ${content}

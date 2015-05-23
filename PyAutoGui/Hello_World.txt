@@ -1,0 +1,28 @@
+*** Settings ***
+Library           OperatingSystem
+Library           Collections
+Library           AutoItLibrary
+Library           pyautogui
+
+*** Test Cases ***
+MessageBox
+    ${result}    Alert    this is a alert message box
+    alert    you press "${result}"
+    ${result}    Confirm    this is a confirmation
+    alert    you press "${result}"
+    ${result}    prompt    this is a prompt
+    Run Keyword If    '${result}' == 'None'    alert    you cancel !
+    Run Keyword unless    '${result}' == 'None'    alert    you input "${result}" !
+
+ScreenShot
+    ScreenShot    001.png
+
+LocateOnScreen
+    #bellow dose not work, python bug ???
+    #    Locate On Screen    windows_start_button.png
+    ${scr}    Screenshot
+    ${rs}    Locate All    windows_start_butto.png    ${scr}
+    ${ls}    Convert To List    ${rs}
+
+AutoIt
+    Auto It Set Option

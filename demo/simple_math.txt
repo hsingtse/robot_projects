@@ -1,0 +1,10 @@
+*** Test Cases ***
+Opertions with private variables
+    ${s1}=    Get Time    year    #use Get Time Method to get this year as a string
+    ${n2}=    Set Variable    ${100}    #assign a constant integer value
+    Should Be Equal As Integers    ${n2}    100    #conver to number to compare
+    ${n3}=    Evaluate    ${s1}+${n2}    #conver to number and sum to total
+
+test Condition
+    ${i}    set variable    ${1}
+    run keyword if    ${i} == 1    log    aaaa

@@ -1,0 +1,13 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Test Cases ***
+simple driver
+    ${protocal}    set variable    http://
+    ${drsays}    set variable    test.drsays.com
+    ${mdreliance}    set variable    test.mdreliance.com
+    ${login}    set variable    admin:admin888@
+    #
+    ${w1}    Open Browser    ${protocal}${login}${drsays}
+    #    Choose OK On Next Confirmation
+    #    go to    ${protocal}${drsays}

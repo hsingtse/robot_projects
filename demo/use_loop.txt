@@ -1,0 +1,7 @@
+*** Test Cases ***
+Nest Loop
+    ${val}    set variable    ${0}
+    #    :FOR    ${i}    in range    0    3
+    :FOR    ${j}    in range    0    3
+    \    ${val}    evaluate    ${val} + 1
+    log    '${val}='${val}

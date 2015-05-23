@@ -1,0 +1,25 @@
+*** Settings ***
+Suite Setup       Open forefox browser
+Suite Teardown    Close All Browsers
+Test Template     Open browser to url
+Library           Selenium2Library
+
+*** Test Cases ***    target_url
+Go to yahoo           http://tw.yahoo.com
+                      http://www.pchome.com.tw
+
+Go to google          https://www.google.com.tw
+
+Cancel templete from suite setting
+                      [Template]                   None
+                      open browser                 http://tw.yahoo.com
+                      [Teardown]
+
+*** Keywords ***
+Open browser to url
+    [Arguments]    ${url}
+    go to    ${url}
+    sleep    3
+
+Open forefox browser
+    open browser    about:blank

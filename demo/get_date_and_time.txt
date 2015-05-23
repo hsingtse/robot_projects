@@ -1,0 +1,16 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          resource.txt
+
+*** Test Cases ***
+get current time and store into global variables
+    ${y}    ${m}    ${d}    Get Time    year,month,day
+    Set Global Variable    ${THIS_YEAR}    ${y}    # ${y}, ${m}, ${d} are all strings
+    ${v}    Evaluate    ${m} - 3    #Evaluate convert ${m} to number
+    Set Global Variable    ${THIS_MONTH}    ${m}    #number
+    Set Global Variable    ${THIS_DAY}    ${d}    #string
+
+read and compare global variables
+    Should Be Equal    ${THIS_YEAR}    2015    #string compare
+    #    Should Be Equal    ${THIS_MONTH}    ${5}    #number compare, ${9} means 9 is number but not string
+    Should Be Equal As Integers    ${THIS_MONTH}    5    #compare as integer, so string 9 will be converted to integer 9

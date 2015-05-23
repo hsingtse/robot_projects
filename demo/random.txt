@@ -1,0 +1,3 @@
+*** Test Cases ***
+simple random
+    ${r}    evaluate    random.randint(1, 10)    random

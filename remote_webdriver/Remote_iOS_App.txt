@@ -1,0 +1,17 @@
+*** Settings ***
+Library           AppiumLibrary
+
+*** Variables ***
+${REMOTE_APPIUM_SERVER}    http://192.168.43.15:4723/wd/hub
+${REMOTE_APP_PATH}    /Users/joelee/Documents/ios-apps/WebViewApp.app
+
+*** Test Cases ***
+open webviewapp
+    open application    ${REMOTE_APPIUM_SERVER}    platformName=iOS    platformVersion=7.1    deviceName=iPhone Simulator    app=${REMOTE_APP_PATH}
+    #    AppiumLibrary.Input Text    //UIAApplication[1]/UIAWindow[1]/UIATextField[1]    tw.yahoo.com
+    AppiumLibrary.Input Text    accessibility_id=Enter URL    tw.yahoo.com
+    click element    accessibility_id=btnGo
+    sleep    1
+    Go To Url    http://tw.yahoo.com
+    sleep    3
+    close application

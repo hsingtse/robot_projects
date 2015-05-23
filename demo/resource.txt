@@ -1,0 +1,12 @@
+*** Variables ***
+${THIS_YEAR}      ${EMPTY}
+${THIS_MONTH}     ${EMPTY}
+${THIS_DAY}       ${EMPTY}
+
+*** Keywords ***
+Initialize Suite
+    ${y}    ${m}    ${d}=    Get Time    year, month, day
+    ${m}    Evaluate    (${m}-2)
+    Set Global Variable    ${THIS_YEAR}    ${y}
+    Set Suite Variable    ${THIS_MONTH}    ${m}
+    Set Suite Variable    ${THIS_DAY}    ${d}

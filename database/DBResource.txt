@@ -1,0 +1,24 @@
+*** Settings ***
+Library           DatabaseLibrary
+
+*** Variables ***
+${API}            MySQLdb
+${DATABASE}       test
+${USERNAME}       root
+${PASSWORD}       20475@ure
+${HOST}           106.187.41.33
+${PORT}           3306
+${SQL_CREATE_TABLE_tab1}    CREATE TABLE tab1 (id int(11) NOT NULL AUTO_INCREMENT, MDAccount varchar(50) DEFAULT NULL, AppRange int(11) DEFAULT NULL, PRIMARY KEY (id))
+${SQL_INSERT_TABLE_tab1}    INSERT INTO tab1 select 0, 'test1', 0 union select 2, 'test2', 2 union select 3, 'test3', 3;
+${SQL_DROP_TABLE_tab1}    drop table if exists tab1
+${SQL_UPDATE_TABLE_tab1}    update tab1 set MDAccount='aaaaa' where id=1
+
+*** Keywords ***
+Open Test DB
+    Connect to Database    ${API}    ${DATABASE}    ${USERNAME}    ${PASSWORD}    ${HOST}    ${PORT}
+    Execute Sql String    ${SQL_DROP_TABLE_tab1}
+    Execute Sql String    ${SQL_CREATE_TABLE_tab1}
+
+Close Test DB
+    Execute Sql String    ${SQL_DROP_TABLE_tab1}
+    Disconnect From Database

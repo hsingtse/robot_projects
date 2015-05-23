@@ -1,0 +1,52 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Collections
+Library           BuiltIn
+
+*** Variables ***
+
+*** Test Cases ***
+Get values in collection
+    ${list1}    Convert To List    abcde    # act as one string: 'abcde'
+    @{list2}    Convert To List    XYZ    # act as one array: ['a', 'b', 'c', 'd', 'e']
+    Append To List    ${list2}    W
+    ${p1}    Get From List    ${list1}    1    #get the char at position1: 'b'
+    ${p2}    Get From List    ${list2}    3    #$ means use @{list2} as one string, so will retrieve char 'W'
+    #    @{p3}    Get From List    @{list2}    1    #got an error of arguments number
+
+Operate Dictionary
+    ${dic1}    Create Dictionary    id    ${1}    name    joe
+    ${dic2}    Create Dictionary    id=${2}    name=mary    sex=F
+    ${keys}    Get Dictionary Keys    ${dic1}    # ['id', 'name']
+    ${items}    Get Dictionary Items    ${dic1}    # ['id', 1, 'name', 'joe']
+    ${values}    Get Dictionary Values    ${dic1}    # [1, 'joe']
+    ${s1}    Get From List    ${items}    2    # name
+    ${myName}    Get From Dictionary    ${dic1}    name    # joe
+    @{list}    Convert To List    ${dic2}    # convert to list
+
+Create Large Dictionary
+    ${dic}    Create Dictionary
+    Set To Dictionary    ${dic}    id    1
+    Set To Dictionary    ${dic}    name    superman
+    Set To Dictionary    ${dic}    sex    M
+    Set To Dictionary    ${dic}    age    36
+    Set To Dictionary    ${dic}    home    N.Y
+    #
+    ${keys}    Get Dictionary Keys    ${dic}
+    ${values}    Get Dictionary Values    ${dic}
+
+Get Length
+    ${list1}    Convert To List    abcde    # act as one string: 'abcde'
+    @{list2}    Convert To List    XYZ    # act as one array: ['a', 'b', 'c', 'd', 'e']
+    ${list3}    set variable    ${list2}
+    ${g1}    Get Length    ${list1}
+    ${g2}    Get Length    ${list2}
+
+Copy List
+    ${lst1}    create list    1111    2222    3333
+    ${lst2}    create list    aaaa    bbbb    cccc
+    ${lst3}    Copy List    ${lst1}
+    #    ${lst3[2]}    set variable    4444
+    log many    ${lst1}
+    log many    ${lst3[2]}
+    log many    ${lst3}

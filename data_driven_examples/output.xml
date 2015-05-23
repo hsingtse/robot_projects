@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20150224 10:55:09.484" generator="Robot 2.8.6 (Python 2.7.8 on win32)">
+<suite id="s1" name="Test 1 &amp; Test 2">
+<suite source="Y:\Documents\My Testing Projects\Tests\test_1.txt" id="s1-s1" name="Test 1">
+<test id="s1-s1-t1" name="test 1 of 1">
+<kw type="kw" name="Selenium2Library.Open Browser">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://tw.yahoo.com</arg>
+</arguments>
+<msg timestamp="20150224 10:55:09.671" level="INFO">Opening browser 'firefox' to base url 'http://tw.yahoo.com'</msg>
+<status status="PASS" endtime="20150224 10:55:14.104" starttime="20150224 10:55:09.671"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="PASS" endtime="20150224 10:55:14.104" critical="yes" starttime="20150224 10:55:09.671"></status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="PASS" endtime="20150224 10:55:14.104" starttime="20150224 10:55:09.515"></status>
+</suite>
+<suite source="Y:\Documents\My Testing Projects\Tests\test_2.txt" id="s1-s2" name="Test 2">
+<test id="s1-s2-t1" name="test 1 of 2">
+<kw type="kw" name="Selenium2Library.Open Browser">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>https://www.google.com.tw</arg>
+</arguments>
+<msg timestamp="20150224 10:55:14.119" level="INFO">Opening browser 'firefox' to base url 'https://www.google.com.tw'</msg>
+<status status="PASS" endtime="20150224 10:55:18.271" starttime="20150224 10:55:14.119"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="PASS" endtime="20150224 10:55:18.271" critical="yes" starttime="20150224 10:55:14.119"></status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="PASS" endtime="20150224 10:55:18.271" starttime="20150224 10:55:14.104"></status>
+</suite>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="PASS" endtime="20150224 10:55:18.286" starttime="20150224 10:55:09.484"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="2">Critical Tests</stat>
+<stat fail="0" pass="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" pass="2" id="s1" name="Test 1 &amp; Test 2">Test 1 &amp; Test 2</stat>
+<stat fail="0" pass="1" id="s1-s1" name="Test 1">Test 1 &amp; Test 2.Test 1</stat>
+<stat fail="0" pass="1" id="s1-s2" name="Test 2">Test 1 &amp; Test 2.Test 2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

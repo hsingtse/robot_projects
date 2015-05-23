@@ -1,0 +1,7 @@
+*** Settings ***
+Library           requests
+Library           OAuth2
+
+*** Test Cases ***
+test1
+    ${r}    OAuth2    http://119.9.93.203:9782/token

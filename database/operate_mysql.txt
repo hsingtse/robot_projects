@@ -1,0 +1,51 @@
+*** Settings ***
+Library           DatabaseLibrary
+
+*** Test Cases ***
+query demo
+    [Setup]    open database
+    ${sql}    set variable    select actor_id, first_name, last_name from actor where first_name like 'A%';
+    # execute select sql
+    ${ds}    DatabaseLibrary.Query    ${sql}
+    log many    @{ds}
+    # parse result set from database
+    #get total record count
+    ${len}    get length    ${ds}
+    # access each record in result set
+    : FOR    ${row}    IN    @{ds}
+    \    log    ${row}
+    # access each by index
+    :FOR    ${i}    in range    ${len}
+    \    ${row}    set variable    ${ds[${i}]}
+    \    ${id}    set variable    ${row[0]}
+    \    ${fn}    set variable    ${row[1]}
+    \    ${ln}    set variable    ${row[2]}
+    \    log    ${i} - ${id}. ${fn} ${ln}
+    [Teardown]    close database
+
+insert update delete demo
+    [Setup]    open database
+    # insert data into Actor Table
+    ${id}    set variable    1999
+    ${first_name}    set variable    test first name
+    ${last_name}    set variable    test last name
+    ${sql}    set variable    insert into actor (actor_id, first_name, last_name) values('${id}', '${first_name}', '${last_name}');
+    DatabaseLibrary.Execute Sql String    ${sql}
+    # select back the new record
+    ${sql}    set variable    select * from actor where actor_id = ${id}
+    ${ds}    DatabaseLibrary.Query    ${sql}
+    log many    ${ds}
+    # update
+    ${sql}    set variable    update actor set first_name = 'aaaa' where actor_id = ${id}
+    DatabaseLibrary.Execute Sql String    ${sql}
+    # delete the new record from database
+    ${sql}    set variable    delete from actor where actor_id = '${id}'
+    DatabaseLibrary.Execute Sql String    ${sql}
+    [Teardown]    close database
+
+*** Keywords ***
+open database
+    Connect To Database    MySQLdb    sakila    user    user    10.211.55.24    3306
+
+close database
+    Disconnect From Database

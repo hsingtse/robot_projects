@@ -1,0 +1,43 @@
+*** Settings ***
+Library           Collections
+Library           OperatingSystem
+Library           RequestsLibrary
+Library           requests
+
+*** Test Cases ***
+Simple Request
+    Create Session    google    http://www.google.com
+    ${response}    RequestsLibrary.Get    google    /
+
+Get Data Via requests
+    ${response}    requests.Get    http://119.9.93.203:9781/api/Charge/GetNecessaryItems    #get the response status
+    @{result}    requests.Get    http://119.9.93.203:9781/api/Charge/GetNecessaryItems    #get the response data
+    log many    ${response}
+    log many    @{result}
+
+Get Data Via RequestsLibrary
+    Create Session    apiserver    http://119.9.93.203:9781
+    ${service}=    set variable    /api/Charge/GetNecessaryItems
+    ${response}    RequestsLibrary.Get    apiserver    ${service}    #get the response status
+    @{result}    RequestsLibrary.Get    apiserver    ${service}    #get the response data
+    log many    ${response}
+    log many    @{result}
+
+POST Via requests
+    ${pars}    Create Dictionary    Year=2014    Month=9    FacilityId=50    InvoiceType=1
+    @{result}    requests.Post    http://119.9.93.203:9781/api/Charge/GetInvoice    ${pars}
+    log many    @{result}
+
+POST Via RequestsLibrary
+    ${pars}    Create Dictionary    Year=2014    Month=9    FacilityId=50    InvoiceType=1
+    ${headers}    Create Dictionary    Content-Type=application/x-www-form-urlencoded
+    Create Session    api    http://119.9.93.203:9781
+    ${charge}    set variable    /api/Charge/GetInvoice
+    @{result}    RequestsLibrary.Post    api    ${charge}    ${pars}    ${headers}
+    log many    @{result}
+
+Request and Response Objects
+    Create Session    wiki    http://en.wikipedia.org/wiki/Monty_Python
+    ${r}    RequestsLibrary.Get    wiki    /
+    ${headers}    Convert To String    ${r}.headers
+    Create File    headers.txt    ${headers}

@@ -1,0 +1,2 @@
+*** Variables ***
+@{NAMES}          name    joe    id    001    sex    M
